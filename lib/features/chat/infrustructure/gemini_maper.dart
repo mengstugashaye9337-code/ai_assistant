@@ -1,7 +1,7 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 import '../domain/chat_message.dart';
 
-class ChatMapper {
+class GeminiChatMapper {
   static Content toGemini(ChatMessage message) {
     switch (message.sender) {
       case MessageSender.user:
@@ -12,7 +12,7 @@ class ChatMapper {
     }
   }
 
-  static ChatMessage fromGemini(GenerateContentResponse response) {
+  static ChatMessage fromGemini(GenerateContentResponse response,) {
     return ChatMessage(text: response.text ?? '', sender: MessageSender.ai);
   }
 }

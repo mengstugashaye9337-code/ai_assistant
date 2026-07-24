@@ -5,13 +5,13 @@ import 'package:ai_assistant/features/auth/presentation/validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_assistant/core/router/app_router.dart';
 
-class SignInPage extends ConsumerStatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends ConsumerStatefulWidget {
+  const SignUpPage({super.key});
   @override
-  ConsumerState<SignInPage> createState() => _SignInPageState();
+  ConsumerState<SignUpPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends ConsumerState<SignInPage> {
+class _SignInPageState extends ConsumerState<SignUpPage> {
   late final TextEditingController _emailcontroller,
       _firstNamecontroller,
       _secondNamecontroller;

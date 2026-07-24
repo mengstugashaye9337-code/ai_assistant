@@ -3,12 +3,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/application/auth_notifier.dart';
 import '../../features/auth/presentation/home_page.dart';
-import '../../features/auth/presentation/signin_page.dart';
-import '../../features/auth/presentation/signup_page.dart';
-import '../../features/auth/presentation/splash_page.dart';
+
 import 'auth_refresh_listenable.dart';
 import '../../features/auth/presentation/settings.dart';
 import '../../features/auth/presentation/profile.dart';
+import 'package:ai_assistant/features/chat/presentations/chat_page.dart';
+import 'package:ai_assistant/features/auth/presentation/signin_page.dart';
+import 'package:ai_assistant/features/auth/presentation/signup_page.dart';
+import 'package:ai_assistant/features/auth/presentation/splash_page.dart';
 
 abstract class AppRoutes {
   static const splash = '/splash';
@@ -17,6 +19,7 @@ abstract class AppRoutes {
   static const home = '/home';
   static const settings = '/settings';
   static const profile = '/profile';
+  static const chatpage = '/chatpage';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -88,6 +91,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.profile,
         builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: AppRoutes.chatpage,
+        builder: (context, state) => const ChatScreen(),
       ),
     ],
   );

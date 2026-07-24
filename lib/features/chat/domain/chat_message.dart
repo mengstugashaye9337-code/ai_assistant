@@ -6,7 +6,11 @@ class ChatMessage {
 
   const ChatMessage({required this.text, required this.sender});
 
-  ChatMessage copyWith({String? text, MessageSender? sender}) {
-    return ChatMessage(text: text ?? this.text, sender: sender ?? this.sender);
+  ChatMessage copyWith({
+    String? text, 
+    MessageSender? sender}) {
+    return ChatMessage(
+      text: text ?? this.text, 
+      sender: sender ?? this.sender);
   }
 }
