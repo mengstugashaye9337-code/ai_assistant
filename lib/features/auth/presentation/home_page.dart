@@ -1,12 +1,12 @@
-import 'package:ai_assistant/features/auth/application/auth_notifier.dart';
+//import 'package:ai_assistant/features/auth/application/auth_notifier.dart';////
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 //import 'package:ai_assistant/features/auth/presentation/home_page.dart';
-import 'package:ai_assistant/features/auth/presentation/settings.dart';
+//import 'package:ai_assistant/features/auth/presentation/settings.dart';
 
-import 'package:ai_assistant/features/auth/presentation/profile.dart';
-import 'package:go_router/go_router.dart';
+//import 'package:ai_assistant/features/auth/presentation/profile.dart';
+//import 'package:go_router/go_router.dart';
 import 'package:ai_assistant/core/router/app_router.dart';
 
 //import 'package:ai_assistant/features/auth/presentation/validator.dart';
@@ -14,9 +14,6 @@ import 'package:ai_assistant/core/router/app_router.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
-  
-
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,10 +22,10 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('homepage'),
         actions: [
-          
           IconButton(
-            onPressed: ()=>AppRoutes.profile, 
-            icon: Icon(Icons.person))
+            onPressed: () => AppRoutes.profile,
+            icon: Icon(Icons.person),
+          ),
         ],
       ),
       body: Center(

@@ -58,6 +58,12 @@ class ProfilePage extends ConsumerWidget {
                     title: const Text('setting'),
                     onTap: () => context.go(AppRoutes.settings),
                   ),
+
+                  ListTile(
+                    leading: const Icon(Icons.smart_toy),
+                    title: const Text('setting'),
+                    onTap: () => context.go(AppRoutes.chatpage),
+                  ),
                 ],
               );
             case Unauthenticated():
