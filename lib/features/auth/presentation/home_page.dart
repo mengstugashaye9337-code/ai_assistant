@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 //import 'package:ai_assistant/features/auth/presentation/home_page.dart';
 //import 'package:ai_assistant/features/auth/presentation/settings.dart';
 
-//import 'package:ai_assistant/features/auth/presentation/profile.dart';
-//import 'package:go_router/go_router.dart';
+//import 'package:ai_assistant/features/auth/presentation/profile.dart';import 'package:go_router/go_router.dart';
 import 'package:ai_assistant/core/router/app_router.dart';
+import 'package:go_router/go_router.dart';
 
 //import 'package:ai_assistant/features/auth/presentation/validator.dart';
 //import 'package:ai_assistant/features/auth/presentation/auth_gate.dart';
@@ -23,7 +23,7 @@ class HomePage extends ConsumerWidget {
         title: const Text('homepage'),
         actions: [
           IconButton(
-            onPressed: () => AppRoutes.profile,
+            onPressed: () => context.go(AppRoutes.profile),
             icon: Icon(Icons.person),
           ),
         ],

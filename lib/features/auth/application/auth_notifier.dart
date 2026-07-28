@@ -27,7 +27,7 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     _repository = ref.read(authRepositoryProvider);
 
     final user = await _repository.getCurrentUser();
-
+    print("Current user: $user");
     if (user != null) {
       return Authenticated(user);
     }
@@ -37,9 +37,12 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
 
   Future<void> signIn(String email, String password) async {
     //final repo = ref.read(authRepositoryProvider);
+    print("Signing in...");
     state = const AsyncLoading();
+
     state = await AsyncValue.guard(() async {
       final user = await _repository.signIn(email, password);
+      print("User signed in: ${user.email}");
       return Authenticated(user);
     });
   }

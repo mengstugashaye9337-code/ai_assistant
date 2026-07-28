@@ -18,7 +18,7 @@ class ChatNotifier extends Notifier<ChatState> {
     return ChatState.initial();
   }
 
-  @override
+
   Future<void> sendMessage(String message) async {
     final userMessage = ChatMessage(text: message, sender: MessageSender.user);
     final aiMessage = ChatMessage(text: '', sender: MessageSender.ai);

@@ -5,5 +5,5 @@ class Env {
 
   static String get supabaseUrl => dotenv.env['MY_SUPABASE_URL']!;
 
-  static String get supabaseAnonKey => dotenv.env['MY_SUPABASE_KEY']!;
+  static String get supabaseAnonKey => dotenv.env['MY_SUPABASE_ANON_KEY']!;
 }

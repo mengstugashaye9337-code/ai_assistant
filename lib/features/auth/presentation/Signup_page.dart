@@ -66,19 +66,21 @@ class _SignInPageState extends ConsumerState<SignUpPage> {
               ),
               TextFormField(
                 controller: _firstNamecontroller,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'First Name'),
                 validator: Validator.validateName,
               ),
               TextFormField(
                 controller: _secondNamecontroller,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Last Name'),
+
                 validator: Validator.validateName,
               ),
 
               TextFormField(
                 controller: _confirmPasswordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                ),
                 obscureText: true,
                 validator: (value) => Validator.validateConfirmPassword(
                   value,

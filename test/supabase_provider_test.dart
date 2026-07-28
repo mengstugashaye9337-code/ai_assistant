@@ -1,5 +1,5 @@
 import 'package:ai_assistant/features/auth/infrastructure/supabase_auth_repository.dart';
-import 'package:ai_assistant/features/auth/infrastructure/supabase_auth_repository.dart';
+import 'package:ai_assistant/features/auth/infrastructure/supabase_client_provider.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -36,6 +36,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isAuthPage =
           state.matchedLocation == AppRoutes.signIn ||
           state.matchedLocation == AppRoutes.signUp;
+      final isSplashPage = state.matchedLocation == AppRoutes.splash;
 
       return auth.when(
         loading: () => AppRoutes.splash,
@@ -45,7 +46,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         data: (authState) {
           switch (authState) {
             case Authenticated():
-              if (isAuthPage) {
+              if (isAuthPage || isSplashPage) {
                 return AppRoutes.home;
               }
 
