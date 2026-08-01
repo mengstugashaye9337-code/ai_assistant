@@ -2,7 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_assistant/features/chat/domain/ai_repository.dart';
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
-import 'package:ai_assistant/features/chat/infrustructure/airepository_provider.dart';
+import 'package:ai_assistant/features/chat/infrustructure/provider/repository_provider.dart';
 import 'chat_state.dart';
 
 final chatNotifierProvider = NotifierProvider<ChatNotifier, ChatState>(

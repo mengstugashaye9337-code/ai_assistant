@@ -11,7 +11,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 });
 
 class SupabaseAuthRepository implements AuthRepository {
-  SupabaseAuthRepository({required SupabaseClient client}) : _client = client;
+  SupabaseAuthRepository({required this._client});
 
   final SupabaseClient _client;
 
