@@ -19,11 +19,9 @@ class ChatNotifier extends Notifier<ChatState> {
   }
 
   Future<void> sendMessage(String message) async {
-    print("2. sendMessage called");
     final userMessage = ChatMessage(text: message, sender: MessageSender.user);
     final aiMessage = ChatMessage(text: '', sender: MessageSender.ai);
 
-    print("3. Calling repository...");
     state = ChatState(
       messages: [...state.messages, userMessage, aiMessage],
       status: Streaming(),
@@ -35,7 +33,7 @@ class ChatNotifier extends Notifier<ChatState> {
 
       // 2. Send the sanitized history
       final stream = _repository.sendMessage(conversation);
-      print("4. Repository returned stream");
+
       final updatedMessages = List<ChatMessage>.from(state.messages);
       final index = updatedMessages.length - 1;
 

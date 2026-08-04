@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ai_assistant/features/chat/infrustructure/groq_service.dart';
+import 'package:ai_assistant/features/chat/infrustructure/groq_client.dart';
 import 'package:ai_assistant/core/config/env.dart';
 
 final dioProvider = Provider<Dio>((ref) {

@@ -5,7 +5,7 @@ import '../../features/auth/application/auth_notifier.dart';
 
 class AuthRefreshListenable extends ChangeNotifier {
   AuthRefreshListenable(Ref ref) {
-    ref.listen(authNotifierProvider, (_, __) {
+    ref.listen(authNotifierProvider, (_, _) {
       notifyListeners();
     });
   }

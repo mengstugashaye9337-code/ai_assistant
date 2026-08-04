@@ -41,7 +41,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       return auth.when(
         loading: () => AppRoutes.splash,
 
-        error: (_, __) => AppRoutes.signIn,
+        error: (_, _) => AppRoutes.signIn,
 
         data: (authState) {
           switch (authState) {
