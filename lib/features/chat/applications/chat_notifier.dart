@@ -2,6 +2,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_assistant/features/chat/domain/ai_repository.dart';
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
+import 'package:ai_assistant/features/chat/domain/conversation_context_factory.dart';
+
 import 'package:ai_assistant/features/chat/infrustructure/provider/repository_provider.dart';
 import 'chat_state.dart';
 
@@ -31,13 +33,17 @@ class ChatNotifier extends Notifier<ChatState> {
         return !(m.sender == MessageSender.ai && m.text.isEmpty);
       }).toList();
 
-      // 2. Send the sanitized history
-      final stream = _repository.sendMessage(conversation);
+      final context = ConversationContextFactory.create(
+        messages: conversation,
+        summary: '',
+      );
 
-      final updatedMessages = List<ChatMessage>.from(state.messages);
-      final index = updatedMessages.length - 1;
+      // 2. Send the sanitized history
+      final stream = _repository.sendMessage(context);
 
       await for (final chunk in stream) {
+        final updatedMessages = List<ChatMessage>.from(state.messages);
+        final index = updatedMessages.length - 1;
         final currentText = updatedMessages[index].text;
         updatedMessages[index] = updatedMessages[index].copyWith(
           text: currentText + chunk,
