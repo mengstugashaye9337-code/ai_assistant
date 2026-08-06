@@ -1,7 +1,7 @@
 import 'package:ai_assistant/features/chat/domain/conversation_summary_services.dart';
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
-import 'package:ai_assistant/features/chat/infrustructure/repository/groq_client.dart';
-import 'package:ai_assistant/features/chat/infrustructure/summary/summary_mapper.dart';
+import 'package:ai_assistant/features/chat/infrustructure/services/groq_client.dart';
+//import 'package:ai_assistant/features/chat/infrustructure/summary/summary_mapper.dart';
 import 'package:ai_assistant/features/chat/infrustructure/summary/summary_builder.dart';
 
 class GroqConversationSummaryService implements ConversationSummaryService {
@@ -15,9 +15,9 @@ class GroqConversationSummaryService implements ConversationSummaryService {
 
   @override
   Future<String> summarizeConversation(List<ChatMessage> messages) async {
-    final requestBody = _builder.buildSummary(messages);
-    final Summary = await _client.chat(requestBody);
+    final requestBody = _builder.build(messages);
+    final summary = await _client.summarize(requestBody);
 
-    return Summary;
+    return summary;
   }
 }

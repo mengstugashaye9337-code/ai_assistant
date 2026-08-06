@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class GroqClient {
   final Dio dio;
@@ -46,6 +47,28 @@ class GroqClient {
           }
         }
       }
+    } on DioException catch (e) {
+      throw Exception(e.message);
+    }
+  }
+
+  Future<String> summarizer(Map<String, dynamic> requestBody) async {
+    try {
+      final summary = await dio.post(_chatEndpoint, data: requestBody);
+
+      final data = summary.data;
+
+      if (data == null) {
+        throw Exception('Empty response');
+      }
+
+      final content = data['choices']?[0]?['message']?['content'];
+
+      if (content is! String) {
+        throw Exception('Invalid response format');
+      }
+
+      return content;
     } on DioException catch (e) {
       throw Exception(e.message);
     }

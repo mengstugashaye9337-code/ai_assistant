@@ -1,11 +1,16 @@
 //import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_assistant/features/chat/domain/ai_repository.dart';
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
 import 'package:ai_assistant/features/chat/domain/conversation_context_factory.dart';
-
+import 'package:ai_assistant/features/chat/domain/conversation_summary_services.dart';
+//import 'package:ai_assistant/features/chat/domain/ai_repository.dart';
+//import 'package:ai_assistant/features/chat/infrustructure/provider/repository_provider.dart';
+import 'package:ai_assistant/features/chat/infrustructure/provider/summary_provider.dart';
 import 'package:ai_assistant/features/chat/infrustructure/provider/repository_provider.dart';
 import 'chat_state.dart';
+import 'package:ai_assistant/core/config/ai_config.dart';
 
 final chatNotifierProvider = NotifierProvider<ChatNotifier, ChatState>(
   ChatNotifier.new,
@@ -13,6 +18,7 @@ final chatNotifierProvider = NotifierProvider<ChatNotifier, ChatState>(
 
 class ChatNotifier extends Notifier<ChatState> {
   late final AIRepository _repository;
+  late final ConversationSummaryService _summaryService;
 
   @override
   ChatState build() {
@@ -33,9 +39,18 @@ class ChatNotifier extends Notifier<ChatState> {
         return !(m.sender == MessageSender.ai && m.text.isEmpty);
       }).toList();
 
+      final oldMessages = conversation.length > AIConfig.maxContextMessages
+          ? conversation.sublist(
+              0,
+              conversation.length - AIConfig.maxContextMessages,
+            )
+          : [];
+
+      _summaryService = ref.read(conversationSummaryServiceProvider);
+      final request = await _summaryService.summarizeConversation(oldMessages);
       final context = ConversationContextFactory.create(
         messages: conversation,
-        summary: '',
+        summary: request,
       );
 
       // 2. Send the sanitized history

@@ -1,5 +1,5 @@
 import 'package:ai_assistant/features/chat/domain/conversation_context.dart';
-import 'package:ai_assistant/features/chat/infrustructure/groqmessage_mapper.dart';
+import 'package:ai_assistant/features/chat/infrustructure/repository/groqmessage_mapper.dart';
 import 'package:ai_assistant/core/config/ai_config.dart';
 
 class ConversationBuilder {
