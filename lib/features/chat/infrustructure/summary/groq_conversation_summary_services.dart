@@ -14,8 +14,11 @@ class GroqConversationSummaryService implements ConversationSummaryService {
        _builder = builder;
 
   @override
-  Future<String> summarizeConversation(List<ChatMessage> messages) async {
-    final requestBody = _builder.build(messages);
+  Future<String> summarizeConversation(
+    List<ChatMessage> messages,
+    String? oldSummary,
+  ) async {
+    final requestBody = _builder.build(messages, oldSummary);
     final summary = await _client.summarize(requestBody);
 
     return summary;

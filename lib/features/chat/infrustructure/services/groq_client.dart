@@ -52,7 +52,7 @@ class GroqClient {
     }
   }
 
-  Future<String> summarizer(Map<String, dynamic> requestBody) async {
+  Future<String> summarize(Map<String, dynamic> requestBody) async {
     try {
       final summary = await dio.post(_chatEndpoint, data: requestBody);
 

@@ -1,10 +1,9 @@
 import 'package:ai_assistant/core/config/const.dart';
-;
 
 class AIConfig {
   static const model = AIModels.llama33;
   static const stream = true;
-  static const maxContextMessages = 20;
+  static const maxContextMessages = 5;
   static const temperature = 0.7;
   static const instruction =
       'You are a helpful assistant. Answer the questions as best you can. You have access to the following tools:';
