@@ -1,9 +1,9 @@
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
-import 'package:ai_assistant/features/chat/domain/conversation_repository.dart';
+import 'package:ai_assistant/features/chat/domain/message_repository.dart';
 import 'package:ai_assistant/features/chat/infrustructure/repository/supabase_messages_mapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseMessagesRepository implements ConversationRepository {
+class SupabaseMessagesRepository implements MessageRepository {
   SupabaseMessagesRepository({required SupabaseClient client})
     : _client = client;
 
@@ -22,9 +22,13 @@ class SupabaseMessagesRepository implements ConversationRepository {
 
   @override
   Future<ChatMessage> saveMessage(
-    String conversationId,
+    String? conversationId,
     ChatMessage message,
   ) async {
+    if (conversationId == null) {
+      throw ArgumentError('conversationId is required to save a message');
+    }
+
     final response = await _client
         .from('messages')
         .insert({

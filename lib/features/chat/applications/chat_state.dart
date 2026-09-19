@@ -21,16 +21,29 @@ class ChatError extends ChatStatus {
 class ChatState {
   final List<ChatMessage> messages;
   final ChatStatus status;
+  final String? conversationId;
 
-  const ChatState({required this.messages, required this.status});
+  const ChatState({
+    required this.messages,
+    required this.status,
+    this.conversationId,
+  });
   factory ChatState.initial() {
-    return const ChatState(messages: [], status: Idle());
+    return const ChatState(messages: [], status: Idle(), conversationId: null);
   }
 
-  ChatState copyWith({List<ChatMessage>? messages, ChatStatus? status}) {
+  ChatState copyWith({
+    List<ChatMessage>? messages,
+    ChatStatus? status,
+    String? conversationId,
+    bool clearConversationId = false,
+  }) {
     return ChatState(
       messages: messages ?? this.messages,
       status: status ?? this.status,
+      conversationId: clearConversationId
+          ? null
+          : (conversationId ?? this.conversationId),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:ai_assistant/features/chat/domain/chat_message.dart';
-import 'package:ai_assistant/features/chat/domain/conversation_repository.dart';
+import 'package:ai_assistant/features/chat/domain/message_repository.dart';
 //import 'package:ai_assistant/features/chat/infrustructure/repository/supabase_conversation_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
