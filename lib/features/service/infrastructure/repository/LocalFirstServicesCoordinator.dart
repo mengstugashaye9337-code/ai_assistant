@@ -6,14 +6,14 @@ import 'package:ai_assistant/features/service/domain/services_repository.dart';
 
 /// Coordinates immediate local reads with best-effort remote synchronization.
 class LocalFirstServicesCoordinator implements ServicesRepository {
-  final ServicesRepository _local;
+  final LocalServicesRepository _local;
   final ServicesRepository _remote;
    final Duration staleAfter;
   DateTime? _lastSuccessfulSync;
   Future<void>? _activeSync;
 
   LocalFirstServicesCoordinator({
-    required ServicesRepository local,
+    required LocalServicesRepository local,
     required ServicesRepository remote,
     this.staleAfter = const Duration(minutes: 15),
   }) : _local = local,

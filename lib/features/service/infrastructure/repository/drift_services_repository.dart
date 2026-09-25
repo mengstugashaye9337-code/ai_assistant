@@ -8,12 +8,13 @@ class DriftServicesRepository implements  LocalServicesRepository {
 
   DriftServicesRepository({required AppDatabase database})
     : _database = database;
-
+@override
   Future<List<Service>> getServices() async {
     final rows = await _database.select(_database.services).get();
     return rows.map((row) => DriftMapper.fromDatabaseRow(row)).toList();
   }
 
+  @override
   Future<void> replaceServices(List<Service> services) async {
     await _database.transaction(() async {
       await _database.delete(_database.services).go();
@@ -35,7 +36,7 @@ class DriftServicesRepository implements  LocalServicesRepository {
       });
     });
   }
-
+@override
   Future<Service?> getServiceById(String id) async {
     final query = _database.select(_database.services)
       ..where((row) => row.id.equals(id));

@@ -11,9 +11,14 @@ import 'package:ai_assistant/features/chat/presentations/chat_page.dart';
 import 'package:ai_assistant/features/auth/presentation/signin_page.dart';
 import 'package:ai_assistant/features/auth/presentation/signup_page.dart';
 import 'package:ai_assistant/features/auth/presentation/splash_page.dart';
+import 'package:ai_assistant/features/service/presentation/service_page.dart';
+import 'package:ai_assistant/features/service/presentation/service_detail_page.dart';
+import 'package:ai_assistant/features/service/domain/service.dart';
 
 abstract class AppRoutes {
   static const splash = '/splash';
+  static const services = '/services';
+  static const serviceDetail = '/services/:serviceId';
   static const signIn = '/signin';
   static const signUp = '/signup';
   static const home = '/home';
@@ -96,6 +101,23 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.chatpage,
         builder: (context, state) => const ChatScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.services,
+        builder: (context, state) => const ServicePage(),
+        routes: [
+          GoRoute(
+            path: ':serviceId',
+            builder: (context, state) {
+              final service = state.extra;
+              if (service is! Service) {
+                return const ServicePage();
+              }
+
+              return ServiceDetailPage(service: service);
+            },
+          ),
+        ],
       ),
     ],
   );

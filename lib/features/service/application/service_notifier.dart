@@ -19,7 +19,7 @@ class ServiceNotifier extends Notifier<ServiceState> {
   late final ServicesRepository _servicesRepository;
   @override
   ServiceState build() {
-    _servicesRepository = ref.read(localFirstServicesProvider);
+    _servicesRepository = ref.read(servicesRepositoryProvider);
     return ServiceState.initial();
   }
 
