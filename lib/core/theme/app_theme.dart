@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import 'app_spacing.dart';
 import 'app_typography.dart';
 
 /// This file has exactly one job: build the single ThemeData object that
@@ -20,7 +21,12 @@ class AppTheme {
 
       scaffoldBackgroundColor: AppColors.background,
 
-      cardTheme: const CardThemeData(color: AppColors.surface),
+      cardTheme: CardThemeData(
+        color: AppColors.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.md),
+        ),
+      ),
 
       textTheme: AppTypography.textTheme,
     );

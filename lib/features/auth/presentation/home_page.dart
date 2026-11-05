@@ -31,7 +31,18 @@ class HomePage extends ConsumerWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [const Text('Welcome to the Home Page!')],
+          children: [
+            const Text('Welcome to the Home Page!'),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => context.go(AppRoutes.services),
+              child: const Text('Services'),
+            ),
+            ElevatedButton(
+              onPressed: () => context.go(AppRoutes.appointments),
+              child: const Text('My appointments'),
+            ),
+          ],
         ),
       ),
     );

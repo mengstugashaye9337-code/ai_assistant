@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:ai_assistant/core/theme/app_spacing.dart';
 import 'package:ai_assistant/features/service/application/service_notifier.dart';
 import 'package:ai_assistant/features/service/application/service_state.dart';
 import 'package:ai_assistant/features/service/domain/service.dart';
@@ -12,7 +13,7 @@ class ServicePage extends ConsumerStatefulWidget {
   @override
   ConsumerState<ServicePage> createState() => _ServicePageState();
 }
-
+ 
 class _ServicePageState extends ConsumerState<ServicePage> {
   @override
   void initState() {
@@ -21,7 +22,6 @@ class _ServicePageState extends ConsumerState<ServicePage> {
       () => ref.read(serviceNotifierProvider.notifier).loadServices(),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     final serviceState = ref.watch(serviceNotifierProvider);
@@ -49,22 +49,29 @@ class _ServiceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     if (services.isEmpty) {
-      return const Center(child: Text('No services available.'));
+      return Center(
+        child: Text(
+          'No services available.',
+          style: textTheme.bodyLarge,
+        ),
+      );
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.md),
       itemCount: services.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 12),
+      separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
       itemBuilder: (context, index) {
         final service = services[index];
         return Card(
           child: ListTile(
             onTap: () => context.push('/services/${service.id}', extra: service),
-            title: Text(service.name),
-            subtitle: Text(service.description),
-            trailing: Text('\$${service.price}'),
+            title: Text(service.name, style: textTheme.titleMedium),
+            subtitle: Text(service.description, style: textTheme.bodyMedium),
+            trailing: Text('\$${service.price}', style: textTheme.labelLarge),
           ),
         );
       },
@@ -80,16 +87,23 @@ class _ServiceError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Could not load services.'),
-            const SizedBox(height: 8),
-            Text('$error', textAlign: TextAlign.center),
-            const SizedBox(height: 16),
+            Text('Could not load services.', style: textTheme.titleMedium),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              '$error',
+              textAlign: TextAlign.center,
+              style: textTheme.bodyMedium?.copyWith(color: colorScheme.error),
+            ),
+            const SizedBox(height: AppSpacing.md),
             ElevatedButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),

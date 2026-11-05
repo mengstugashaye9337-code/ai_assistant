@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:ai_assistant/core/theme/app_spacing.dart';
 import 'package:ai_assistant/features/service/domain/service.dart';
-
 class ServiceDetailPage extends StatelessWidget {
   const ServiceDetailPage({required this.service, super.key});
 
@@ -12,14 +13,14 @@ class ServiceDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(service.name)),
       body: ListView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           _ServiceDetailHeader(service: service),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.lg),
           _ServiceDetailDescription(description: service.description),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.lg),
           _ServiceDetailFacts(service: service),
-          const SizedBox(height: 32),
+          const SizedBox(height: AppSpacing.xl),
           _ServiceDetailAction(service: service),
         ],
       ),
@@ -96,15 +97,18 @@ class _ServiceFact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Row(
       children: [
-        Icon(icon),
-        const SizedBox(width: 8),
+        Icon(icon, color: colorScheme.primary),
+        const SizedBox(width: AppSpacing.sm),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: Theme.of(context).textTheme.labelMedium),
-            Text(value, style: Theme.of(context).textTheme.titleMedium),
+            Text(label, style: textTheme.labelLarge),
+            Text(value, style: textTheme.titleMedium),
           ],
         ),
       ],
@@ -120,7 +124,10 @@ class _ServiceDetailAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton.icon(
-      onPressed: () {},
+      onPressed: () => context.push(
+        '/services/${service.id}/book',
+        extra: service,
+      ),
       icon: const Icon(Icons.calendar_month_outlined),
       label: Text('Book ${service.name}'),
     );

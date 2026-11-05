@@ -11,6 +11,8 @@ import 'package:ai_assistant/features/chat/presentations/chat_page.dart';
 import 'package:ai_assistant/features/auth/presentation/signin_page.dart';
 import 'package:ai_assistant/features/auth/presentation/signup_page.dart';
 import 'package:ai_assistant/features/auth/presentation/splash_page.dart';
+import 'package:ai_assistant/features/appointment/presentation/appointments_page.dart';
+import 'package:ai_assistant/features/appointment/presentation/booking_page.dart';
 import 'package:ai_assistant/features/service/presentation/service_page.dart';
 import 'package:ai_assistant/features/service/presentation/service_detail_page.dart';
 import 'package:ai_assistant/features/service/domain/service.dart';
@@ -25,6 +27,9 @@ abstract class AppRoutes {
   static const settings = '/settings';
   static const profile = '/profile';
   static const chatpage = '/chatpage';
+  static const appointments = '/appointments';
+  static const book = '/book';
+
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -103,6 +108,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const ChatScreen(),
       ),
       GoRoute(
+        path: AppRoutes.appointments,
+        builder: (context, state) => const AppointmentsPage(),
+      ),
+      GoRoute(
         path: AppRoutes.services,
         builder: (context, state) => const ServicePage(),
         routes: [
@@ -116,6 +125,19 @@ final routerProvider = Provider<GoRouter>((ref) {
 
               return ServiceDetailPage(service: service);
             },
+            routes: [
+              GoRoute(
+                path: 'book',
+                builder: (context, state) {
+                  final service = state.extra;
+                  if (service is! Service) {
+                    return const ServicePage();
+                  }
+
+                  return BookingPage(service: service);
+                },
+              ),
+            ],
           ),
         ],
       ),

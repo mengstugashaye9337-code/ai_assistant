@@ -54,6 +54,11 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 30),
                   ListTile(
+                    leading: const Icon(Icons.event_outlined),
+                    title: const Text('My appointments'),
+                    onTap: () => context.go(AppRoutes.appointments),
+                  ),
+                  ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text('setting'),
                     onTap: () => context.go(AppRoutes.settings),
